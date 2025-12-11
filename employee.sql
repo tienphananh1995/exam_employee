@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Dec 11, 2025 at 01:25 PM
+-- Generation Time: Dec 11, 2025 at 01:29 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -24,30 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `employee`
+-- Table structure for table `employees`
 --
 
-CREATE TABLE `employee` (
+CREATE TABLE `employees` (
   `id` bigint(20) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
   `salary` double DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `employee`
+-- Dumping data for table `employees`
 --
 
-INSERT INTO `employee` (`id`, `name`, `salary`) VALUES
-(1, 'Phan Anh Tiến Quý', 300000);
+INSERT INTO `employees` (`id`, `name`, `salary`) VALUES
+(1, 'Phan Anh Tiến Quý', 1450000);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `employee`
+-- Indexes for table `employees`
 --
-ALTER TABLE `employee`
+ALTER TABLE `employees`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -55,9 +55,9 @@ ALTER TABLE `employee`
 --
 
 --
--- AUTO_INCREMENT for table `employee`
+-- AUTO_INCREMENT for table `employees`
 --
-ALTER TABLE `employee`
+ALTER TABLE `employees`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 

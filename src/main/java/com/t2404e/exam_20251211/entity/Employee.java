@@ -5,17 +5,16 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-@Entity // Đánh dấu đây là một JPA Entity
+@Entity
 public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; // Thuộc tính id
+    private Long id;
 
-    private String name; // Thuộc tính name
-    private Double salary; // Thuộc tính salary
+    private String name;
+    private Double salary;
 
-    // Constructors (No-arg và All-arg)
     public Employee() {}
 
     public Employee(String name, Double salary) {

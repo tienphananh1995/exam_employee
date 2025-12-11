@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quản lý Nhân viên</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { width: 80%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .add-btn { background-color: #4CAF50; color: white; padding: 10px 15px; text-decoration: none; border-radius: 4px; }
+    </style>
+</head>
+<body>
+<h1>📋 Danh sách Nhân viên</h1>
+
+<a th:href="@{/employees/new}" class="add-btn">➕ Thêm Nhân viên Mới</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Tên</th>
+        <th>Mức Lương</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}">1</td>
+        <td th:text="${employee.name}">Nguyễn Văn A</td>
+        <td th:text="${#numbers.formatDecimal(employee.salary, 0, 'COMMA', 2, 'POINT')}">15000000.00</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

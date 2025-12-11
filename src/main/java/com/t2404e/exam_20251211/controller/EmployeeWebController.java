@@ -46,4 +46,27 @@ public class EmployeeWebController {
         // Chuyển hướng về trang danh sách nhân viên sau khi thêm thành công
         return "redirect:/employees";
     }
+
+    @GetMapping("/edit/{id}")
+    public String showFormForUpdate(@PathVariable(value = "id") Long id, Model model) {
+
+        // Lấy nhân viên từ service
+        Employee employee = employeeService.getEmployeeById(id);
+
+        // Đặt nhân viên vào model để điền vào form
+        model.addAttribute("employee", employee);
+
+        // Trả về cùng một view form (employee-form.html)
+        return "employee-form";
+    }
+
+    @PostMapping("/saveUpdate")
+    public String saveUpdateEmployee(@ModelAttribute("employee") Employee employee) {
+
+        // Phương thức này sẽ gọi updateEmployee trong service (phương thức này kiểm tra ID và cập nhật)
+        employeeService.updateEmployee(employee);
+
+        // Chuyển hướng về trang danh sách nhân viên sau khi cập nhật thành công
+        return "redirect:/employees";
+    }
 }

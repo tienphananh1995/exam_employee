@@ -2,33 +2,132 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Thêm Nhân viên</title>
+    <title th:text="${employee.id == null ? 'Thêm Nhân viên' : 'Cập nhật Nhân viên'}"></title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; }
-        input[type="text"], input[type="number"] { width: 300px; padding: 8px; border: 1px solid #ccc; border-radius: 4px; }
-        button { background-color: #007bff; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
-        a { color: #555; margin-left: 10px; text-decoration: none; }
+        /* CSS Reset và Typography cơ bản */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+
+        /* Container cho Form */
+        .form-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tiêu đề */
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 10px;
+        }
+
+        /* Nhóm Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Input Fields */
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 12px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            box-sizing: border-box; /* Quan trọng để padding không làm tăng chiều rộng */
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
+        }
+
+        /* Button Group */
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            justify-content: flex-start; /* Căn chỉnh nút về bên trái */
+            gap: 15px; /* Khoảng cách giữa các nút */
+        }
+
+        button, .btn-cancel {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color 0.3s, opacity 0.3s;
+            text-decoration: none; /* Cho thẻ <a> */
+            display: inline-block;
+            text-align: center;
+        }
+
+        /* Nút Lưu */
+        button[type="submit"] {
+            background-color: #28a745; /* Xanh lá */
+            color: white;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+
+        /* Nút Hủy/Quay lại */
+        .btn-cancel {
+            background-color: #6c757d; /* Xám */
+            color: white;
+        }
+
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
-<h1>✏️ Thêm Nhân viên Mới</h1>
+<div class="form-container">
+    <h1 th:text="${employee.id == null ? 'Thêm Nhân viên Mới' : 'Cập nhật Nhân viên'}"></h1>
 
-<form th:action="@{/employees}" th:object="${employee}" method="POST">
+    <form
+            th:action="@{${employee.id == null ? '/employees' : '/employees/saveUpdate'}}"
+            th:object="${employee}"
+            method="POST">
 
-    <div class="form-group">
-        <label for="name">Tên Nhân viên:</label>
-        <input type="text" id="name" th:field="*{name}" required />
-    </div>
+        <input type="hidden" th:field="*{id}" />
 
-    <div class="form-group">
-        <label for="salary">Mức Lương:</label>
-        <input type="number" id="salary" th:field="*{salary}" step="0.01" required />
-    </div>
+        <div class="form-group">
+            <label for="name">Tên Nhân viên:</label>
+            <input type="text" id="name" th:field="*{name}" required placeholder="Nhập họ tên nhân viên..."/>
+        </div>
 
-    <button type="submit">Lưu Nhân viên</button>
-    <a th:href="@{/employees}">Hủy</a>
-</form>
+        <div class="form-group">
+            <label for="salary">Mức Lương (VND):</label>
+            <input type="number" id="salary" th:field="*{salary}" step="0.01" required placeholder="Ví dụ: 15000000.00"/>
+        </div>
+
+        <div class="button-group">
+            <button type="submit">Lưu Thay Đổi</button>
+            <a th:href="@{/employees}" class="btn-cancel">Hủy</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

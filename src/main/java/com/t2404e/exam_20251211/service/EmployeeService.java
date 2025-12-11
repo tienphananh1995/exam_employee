@@ -42,4 +42,10 @@ public class EmployeeService {
             throw new RuntimeException("Employee with ID " + employee.getId() + " not found.");
         }
     }
+
+    public Employee getEmployeeById(Long id) {
+        // Sử dụng orElseThrow để ném ra RuntimeException nếu không tìm thấy
+        return employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found for id :: " + id));
+    }
 }
